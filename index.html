@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title></title>
+		<link rel="stylesheet" href="css/first.css">
+		<link rel="stylesheet" href="css/echarts.css">
+		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/vue.js"></script>
+		<script type="text/javascript"  src="https://unpkg.com/element-ui/lib/index.js"></script>
+		<script type="text/javascript" src="js/echarts.js"></script>
+		<script type="text/javascript" src="js/toolbox.js"></script>
+		
+			
+		
+	</head>
+	<body>
+		<div id="app">
+			<!--标题-->
+				<el-row>
+					<el-col :span="12">
+						<div id="title">
+							<span>管理人员首页</span>
+						</div>
+					</el-col>
+				</el-row>
+			<!--内容-->
+			<div>
+				<el-row type="flex"  justify="space-around">
+					<!--左边部分开始-->
+					<el-col :span="9" type="flex"  justify="space-around" direction="column">
+						<!--卡片1-->
+						<el-card shadow="always">
+							<div slot="header" class="clearfix">
+								<span class="header">场景数据统计</span>
+							</div>
+							<div class="firstTable">
+								<el-table :data="tableData" :header-cell-style="rowClass" style="width: 100%">
+									<el-table-column prop="doing" label="当日总场景数"></el-table-column>
+									<el-table-column prop="down" label="已执行"></el-table-column>
+									<el-table-column prop="will" label="将要执行"></el-table-column>
+								</el-table>
+							</div>
+							<div class="secondTable">
+								<el-table :data="week_tableData" :header-cell-style="rowClass" style="width: 100%">
+									<el-table-column prop="week_doing" label="本周总场景数"></el-table-column>
+									<el-table-column prop="week_down" label="本周已执行"></el-table-column>
+									<el-table-column prop="week_will" label="本周完成率"></el-table-column>
+								</el-table>
+							</div>
+						</el-card>
+						
+						<!--卡片2-->
+						<el-card shadow="always" class="tcard">
+							<div slot="header" class="clearfix">
+								<span class="header">当日执行情况</span>
+							</div>
+							<el-row>
+								<el-col :span="12">
+									<div id="toolbox_first"></div>
+									<div class="fonts"><span>执行成功率</span></div>
+								</el-col>
+								<el-col :span="12">
+									<div id="toolbox_first2"></div>
+									<div class="fonts"><span>任务完成率</span></div>							
+								</el-col>									
+							</el-row>																																						
+						</el-card>
+						
+						<!--卡片3-->
+							<el-card shadow="always">
+								<div slot="header" class="clearfix">
+									<span class="header">本周执行情况</span>
+								</div>
+								<el-row>
+									<el-col :span="12">
+										<div id="toolbox_second"></div>										
+										<div class="fonts"><span>执行成功率</span></div>
+									</el-col>
+									<el-col :span="12">
+										<div id="toolbox_second2"></div>										
+										<div class="fonts"><span>执行成功率</span></div>
+									</el-col>	
+								</el-row>	
+							</el-card>
+					</el-col>
+					<!--左边部分结束-->
+					
+					
+					<!--右边部分开始-->
+					<el-col :span="14">
+						<!--卡片1-->
+						<el-card shadow="always">
+							<div slot="header" class="clearfix">
+								<span class="header">执行告警信息</span>
+							</div>
+							<div class="content">
+								<ul>
+									<li>
+										<span>警告总数:50</span>
+									</li>
+									<li>
+										<span>严重:20</span>
+									</li>
+									<li>
+										<span>次要:25</span>
+									</li>
+									<li>
+										<span>一般:5</span>
+									</li>
+								</ul>
+								<ul>
+									<li>
+										<span>告警场景:事件检查</span>
+									</li>
+									<li>
+										<span>告警级别:严重</span>
+									</li>
+									<li>
+										<span>告警内容:无法连接数据库</span>
+									</li>
+									<li>
+										<span>时间:2016-10-05</span>
+									</li>
+								</ul>
+							</div>
+						</el-card>
+						
+						<!--卡片2-->
+						<el-card shadow="always">
+								<div id="con">
+									<div id="tally" :style="{left : move + 'px'}">
+										<div id="tallyz">{{looktime}}</div>	
+									</div>
+									<div id="one" class="timefix">6:00</div>
+									<div id="two" class="timefix">12:00</div>
+									<div id="three" class="timefix">18:00</div>
+									<div id="fourth" class="timefix">24:00</div>
+									<div id="five" class="timefix">6:00</div>
+									<div id="check" class="customer" :style="{ 'background-color':move <= 116.58? '#339900' : '#6699FF'}"><span>市前检查</span></div>
+									<div id="open" class="customer" :style="{ 'background-color':move >= 117.58? (move < 182.24? '#339900':'#6699FF'):'#f7f7f7'}"><span>开市</span></div>
+									<div id="pay" class="customer" :style="{ 'background-color':move >= 183.24? (move < 387.94? '#339900':'#6699FF'):'#f7f7f7'}"><span>交易</span></div>
+									<div id="clos" class="customer" :style="{ 'background-color':move >= 388.94? (move < 453.6? '#339900':'#6699FF'):'#f7f7f7'}"><span>闭市</span></div>
+									<div id="sum" class="customer" :style="{ 'background-color':move >= 454.6? (move < 582.91? '#339900':'#6699FF'):'#f7f7f7'}"><span>清算</span></div>
+									<div id="night" class="customer" :style="{ 'background-color':move >= 583.91? '#339900' : '#f7f7f7'}"><span>夜市</span></div>
+								</div>
+						</el-card>
+						
+						<!--卡片3,图形展示-->
+						<el-card shadow="always">
+							<!--第一行卡片-->
+							<el-row>
+								<el-col :span="8">
+									<el-card>
+										<span>hdaidhia</span>
+										<div style="border:1px solid red;"
+										 id="pieDiagram1">
+										</div>
+									</el-card>
+								</el-col>
+								<el-col :span="8">
+									<el-card>
+										<span>hdaidhia</span>
+										<div style="border:1px solid red;"
+										id="pieDiagram2">
+										</div>
+									</el-card>
+								</el-col>
+								<el-col :span="8">
+									<el-card>
+										<span>hdaidhia</span>
+										<div style="border:1px solid red;"
+										id="pieDiagram3">
+										</div>
+									</el-card>
+								</el-col>
+							</el-row>
+							<!--第二行卡片-->
+							<el-row>
+								<el-col :span="8">
+									<el-card>
+										<span>hdaidhia</span>
+										<div style="border:1px solid red;"
+										id="pieDiagram4">
+										</div>
+									</el-card>
+								</el-col>
+								<el-col :span="8">
+									<el-card>
+										<span>hdaidhia</span>
+										<div style="border:1px solid red;"
+										id="pieDiagram5">
+										</div>
+									</el-card>
+								</el-col>
+								<el-col :span="8">
+									<el-card>
+										<span>hdaidhia</span>
+										<div style="border:1px solid red;"
+										id="pieDiagram6">
+										</div>
+									</el-card>
+								</el-col>
+							</el-row>
+						</el-card>
+					</el-col>
+					<!--右边部分结束-->
+				</el-row>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+	var ve = new Vue({
+	        el: '#app',
+	        data: {
+				looktime:"",
+				move:'',
+				num:"",
+				minutes:'',
+				tableData:[{
+					doing:'22',
+					down:'33',
+					will:'55',
+				}],
+				week_tableData:[{
+					week_doing:'36',
+					week_down:'6',
+					week_will:'16.29%',
+				}],
+	        },
+			methods:{
+				rowClass({row, rowIndex}) {
+					return 'background:#F7F7F7'
+				},
+				getTime(){
+					setInterval(function(){
+					ve.nowTime();
+					},1000);
+				},
+				fnW(str){
+					str>10?this.num=str:this.num="0"+str;
+					return this.num;
+					
+					},
+					
+				nowTime(){
+					var date=new Date();
+					var hours=date.getHours();//小时
+					var minute=date.getMinutes();//分
+					ve.looktime=ve.fnW(hours)+":"+ve.fnW(minute);
+					if((hours-6) < 0){
+						ve.minutes = 1080 + hours * 60 +minute;
+					}else{
+						ve.minutes = Math.abs((hours - 6) * 60 + minute);
+					}
+					
+				},
+				getMove(){
+					setInterval(function(){
+					ve.moveadd();
+					},60000);
+				},
+				moveadd(){
+					if(ve.minutes >= 0 & ve.minutes <= 1080){
+							this.move = this.move + (582 / 1080)
+							if(this.move > 711){
+								this.move = 0
+						}
+					}else{
+							this.move = this.move + (129 / 360)
+							if(this.move > 711){
+								this.move = 0
+						}
+					}
+				},
+				getPx(){
+					ve.nowTime();
+					ve.move = ve.minutes * (582 / 1080)
+					ve.getMove();
+				},
+				
+			}
+	    });
+		ve.getTime();
+		ve.getPx();
+	</script>
+</html>

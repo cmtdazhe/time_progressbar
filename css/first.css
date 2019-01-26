@@ -1,0 +1,132 @@
+body{
+	margin-top: 0px;
+	padding-top: 0px;
+	padding-left: 20px;
+	padding-right: 20px;
+	background-color: #f7f7f7;
+}
+#title{
+	height: 30px;
+	margin-left: 15px;
+}
+.header{
+    font-weight: bolder;
+}
+.firstTable{
+	margin-bottom: 10px;
+}
+ul{
+	display: flex;
+	/* flex-direction: row; */
+}
+ul>li{
+	list-style: none;
+	width: 25%;
+}
+
+#toolbox_first{
+	height: 200px;
+}
+#toolbox_first2{
+	height: 200px;
+}
+#toolbox_second{
+	height: 200px;
+}
+#toolbox_second2{
+	height: 200px;
+}
+#pieDiagram1{
+	height: 200px;
+}
+#pieDiagram2{
+	height: 200px;
+}
+#pieDiagram3{
+	height: 200px;
+}
+#pieDiagram4{
+	height: 200px;
+}
+#pieDiagram5{
+	height: 200px;
+}
+#pieDiagram6{
+	height: 200px;
+}
+
+
+#ZZT{
+	height: 40px;
+}
+#con{
+	margin-top: 10px;
+	margin-bottom: 15px;
+	position: relative;
+	width: 100%;
+	height: 30px;
+	display: flex;
+	text-align: center;
+}
+.customer{
+	border: 1px solid white;
+}
+.timefix{
+	position: absolute;
+	bottom: -18px;
+}
+#one{
+	left:-10px;
+}
+#two{
+	left: 160px;
+}
+#three{
+	left: 370px;
+}
+#fourth{
+	left: 570px;
+}
+#five{
+	left: 700px;
+}
+#tally{
+	position: absolute;
+	top: -5px;
+	bottom:-5px;
+	width: 2px;
+	background-color: skyblue;
+	transition: all .5s;
+}
+#tallyz{
+	position: absolute;
+	bottom:-20px;
+	right: -20px;
+	background-color: gainsboro;
+}
+#check{
+	width: 18%;
+}
+#open{
+	width: 10%;	
+}
+#pay{
+	width: 32%;
+}
+#clos{
+	width: 10%;
+}
+#sum{
+	width: 20%;
+}
+#night{
+	width: 20%;
+}
+#pieDiagram{
+	height: 200px;
+}
+.fonts{
+	text-align: center;
+}
+
+	
